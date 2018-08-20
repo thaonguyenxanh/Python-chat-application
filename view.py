@@ -107,11 +107,15 @@ class View():
             self.rc.blockUser(username)
             print('Success!')
 
-a = View()
-# a.signUp()
-a.singIn()
-# a.modifyUserInformation()
-# a.sendMsg()
-# a.addNewFriend()
-# a.displayMyFriendList()
-a.blockUser()
+def main():
+    a = View()
+    # a.signUp()
+    a.singIn()
+    # a.modifyUserInformation()
+    # a.sendMsg()
+    # a.addNewFriend()
+    # a.displayMyFriendList()
+    a.blockUser()
+if __name__ == '__main__':
+    main()
+    
