@@ -29,12 +29,17 @@ class RelationshipController(RelationshipModel.Friend):
         self.sql.execute(query)
 
     def displayMyFriendlist(self, userId):
-        query = "select DISTINCT friend_list.id, friend_list.user1, friend_list.user2 from users, friend_list where (user1= "+str(
+        query = "select DISTINCT friend_list.user1, friend_list.user2 from users, friend_list where (user1= "+str(
             userId)+" and users.id=  "+str(userId)+" ) or (user2= "+str(userId)+"  and users.id=  "+str(userId)+") and friend_list.blocked=0 ;"
         frList = self.sql.executeSelect(query)
-        for fr in frList:
-            print(fr)
+        return frList
 
     def blockUser(self, username):
         query= "UPDATE friend_list SET blocked=0 WHERE user1= (SELECT users.id FROM users WHERE users.username= '{}') or user2= (SELECT users.id FROM users WHERE users.username='{}')".format(username,username)
         self.sql.execute(query)
+
+    def getFriendUserName(self, user2):
+        query= "SELECT DISTINCT users.username from users, friend_list WHERE users.id= friend_list.user2 AND friend_list.user2= {}".format(user2)
+        friendUsername= self.sql.executeSelect(query)
+        return friendUsername[0][0]
+

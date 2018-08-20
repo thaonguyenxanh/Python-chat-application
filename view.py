@@ -78,7 +78,17 @@ class View():
             return None
 
     def disPlayAllMyMsgs(self):
-        self.msgc.displayAllMyMsg(self.uc.id)
+        msgs = self.msgc.displayAllMyMsg(self.uc.id)
+        for msg in msgs:
+            tempList = []
+            for inf in msg:
+                tempList.append(inf)
+            for i in range(2):
+                if tempList[i] == self.uc.id:
+                    tempList[i] = self.msgc.getUsername2(self.uc.id)[0][0]
+                else:
+                    tempList[i] = self.msgc.getUsername2(tempList[i])[0][0]
+            print(tempList)
 
     def sendMsg(self):
         username = input('Type username you wanna chat: ')
@@ -99,7 +109,17 @@ class View():
                     print('added {} to your friendlist!'.format(username))
 
     def displayMyFriendList(self):
-        self.rc.displayMyFriendlist(self.uc.id)
+        frList = self.rc.displayMyFriendlist(self.uc.id)
+        for fr in frList:
+            tempList = []
+            for inf in fr:
+                tempList.append(inf)
+            for i in range(2):
+                if tempList[i] != self.uc.id:
+                    tempList[i] = self.rc.getFriendUserName(tempList[i])
+                else:
+                    tempList[i] = self.rc.getFriendUserName(self.uc.id)
+            print(tempList)
 
     def blockUser(self):
         username = input('type username you want to block: ')
@@ -110,7 +130,11 @@ class View():
     def displayNotBeSeenMsgs(self):
         notBeSeenMsgsList = self.msgc.displayNotBeSeenMsgs(self.uc.id)
         for msg in notBeSeenMsgsList:
-            print(msg)
+            listTemp = []
+            for i in msg:
+                listTemp.append(i)
+            listTemp[2] = self.msgc.getUserName(listTemp[2])[0][0]
+            print(listTemp)
 
 
 def main():
