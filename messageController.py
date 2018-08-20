@@ -24,3 +24,8 @@ class MessageController(MessageModel.Message):
         query = "INSERT into message(sender, receiver, contents, time) values("+str(userId)+","+str(id) + ",'"+content+"','"+time.ctime()+"');"
         self.sql.execute(query)
         print('Send message successfully!')
+
+    def displayNotBeSeenMsgs(self, userId):
+        query= "select message.id,message.contents, message.sender from message, users where users.id= {} and message.receiver=users.id and message.status=0 order by message.id desc".format(userId)
+        NotBeSeenMsgsList= self.sql.executeSelect(query)
+        return NotBeSeenMsgsList

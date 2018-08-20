@@ -34,7 +34,7 @@ class View():
                         Email = input('Type your email: ')
                         self.uc.SignUp(username, password,
                                        fullname, address, Email)
-                        break
+                        continue
         else:
             print('Username doesnt not have space!')
 
@@ -102,20 +102,62 @@ class View():
         self.rc.displayMyFriendlist(self.uc.id)
 
     def blockUser(self):
-        username= input('type username you want to block: ')
-        if self.com.checkSpace(username)== False:
+        username = input('type username you want to block: ')
+        if self.com.checkSpace(username) == False:
             self.rc.blockUser(username)
             print('Success!')
 
+    def displayNotBeSeenMsgs(self):
+        notBeSeenMsgsList = self.msgc.displayNotBeSeenMsgs(self.uc.id)
+        for msg in notBeSeenMsgsList:
+            print(msg)
+
+
 def main():
     a = View()
-    # a.signUp()
-    a.singIn()
-    # a.modifyUserInformation()
-    # a.sendMsg()
-    # a.addNewFriend()
-    # a.displayMyFriendList()
-    a.blockUser()
+    while 1:
+        print('1: Sign up\n2: Sign In\n')
+        choose1 = input('Choose 1 or 2 to continue: ')
+        if choose1 == '1':
+            a.signUp()
+            continue
+        if choose1 == '2':
+            a.singIn()
+            while 1:
+                print('1: Display all my messages')
+                print('2: Display all my messages have not been read')
+                print('3: Send message')
+                print('4: Display my friendlist')
+                print('5: Add new friend')
+                print('6: Block ')
+                print('7: Modify my information')
+                print('8: Log out')
+                choose2 = input('Choose 1-7 to continue: ')
+                if choose2 == '1':
+                    a.disPlayAllMyMsgs()
+                    continue
+                if choose2 == '2':
+                    a.displayNotBeSeenMsgs()
+                    continue
+                if choose2 == '3':
+                    a.sendMsg()
+                    continue
+                if choose2 == '4':
+                    a.displayMyFriendList()
+                    continue
+                if choose2 == '5':
+                    a.addNewFriend()
+                    continue
+                if choose2 == '6':
+                    a.blockUser()
+                    continue
+                if choose2 == '7':
+                    a.modifyUserInformation()
+                    continue
+                if choose2 == '8':
+                    return 0
+            continue
+
+
 if __name__ == '__main__':
     main()
-    
