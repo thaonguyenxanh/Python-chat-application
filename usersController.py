@@ -21,10 +21,6 @@ class usersController(UserModel.users):
 
 
     def signIn(self, username, password):
-        # while 1:
-        #     username = input('Enter your user name: ')
-            # if(self.common.checkSpace(username) == None) and self.common.CheckUser(username) != None:
-            #     password = input('Enter your password: ')
         query = "select * from users where users.username= '{}' and users.passwords= '{}'".format(
             username, password)
         user = self.sql.executeSelect(query)
