@@ -40,7 +40,7 @@ class View():
 
     def singIn(self):
         username = input('Enter your user name: ')
-        if(self.com.checkSpace(username) == False) and self.com.CheckUser(username) != None:
+        if(self.com.checkSpace(username) == False) and (self.com.CheckUser(username) != None):
             password = input('Enter your password: ')
             self.uc.signIn(username, password)
             return self
@@ -135,7 +135,8 @@ class View():
                 listTemp.append(i)
             listTemp[2] = self.msgc.getUserName(listTemp[2])[0][0]
             print(listTemp)
-
+    def displayFriendListOrderByAddress(self):
+        self.rc.displayFriendListOrderByAdress(self.uc.id)
 
 def main():
     a = View()
@@ -155,8 +156,10 @@ def main():
                 print('5: Add new friend')
                 print('6: Block ')
                 print('7: Modify my information')
-                print('8: Log out')
-                choose2 = input('Choose 1-7 to continue: ')
+                print('8: Display friendlist order by address')
+                print('9: Log out')
+                choose2 = input('Choose 1-9 to continue: ')
+                print('\n\n\n')
                 if choose2 == '1':
                     a.disPlayAllMyMsgs()
                     continue
@@ -179,7 +182,10 @@ def main():
                     a.modifyUserInformation()
                     continue
                 if choose2 == '8':
-                    return 0
+                    a.displayFriendListOrderByAddress()
+                    continue
+                if choose2 =='9':
+                    break
             continue
 
 

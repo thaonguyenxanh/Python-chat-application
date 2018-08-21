@@ -25,7 +25,8 @@ class RelationshipController(RelationshipModel.Friend):
         return isFriend
 
     def addNewFriend(self, userId, id):
-        query = "insert into friend_list(user1, user2, period) values("+str(userId)+","+str(id)+",'"+str(datetime.datetime.now())+"');"
+        query = "insert into friend_list(user1, user2, period) values("+str(
+            userId)+","+str(id)+",'"+str(datetime.datetime.now())+"');"
         self.sql.execute(query)
 
     def displayMyFriendlist(self, userId):
@@ -35,11 +36,24 @@ class RelationshipController(RelationshipModel.Friend):
         return frList
 
     def blockUser(self, username):
-        query= "UPDATE friend_list SET blocked=0 WHERE user1= (SELECT users.id FROM users WHERE users.username= '{}') or user2= (SELECT users.id FROM users WHERE users.username='{}')".format(username,username)
+        query = "UPDATE friend_list SET blocked=0 WHERE user1= (SELECT users.id FROM users WHERE users.username= '{}') or user2= (SELECT users.id FROM users WHERE users.username='{}')".format(
+            username, username)
         self.sql.execute(query)
 
     def getFriendUserName(self, user2):
-        query= "SELECT DISTINCT users.username from users, friend_list WHERE users.id= friend_list.user2 AND friend_list.user2= {}".format(user2)
-        friendUsername= self.sql.executeSelect(query)
+        query = "SELECT DISTINCT users.username from users, friend_list WHERE users.id= friend_list.user2 AND friend_list.user2= {}".format(
+            user2)
+        friendUsername = self.sql.executeSelect(query)
         return friendUsername[0][0]
+
+    def displayFriendListOrderByAdress(self, userId):
+        query = "SELECT DISTINCT users.address from users order by users.address desc"
+        listAdd = self.sql.executeSelect(query)
+        for add in listAdd:
+            print('\t\t\t', add[0])
+            query2 = "select distinct users.username from users, friend_list where friend_list.user1 = users.id or friend_list.user2 = users.id and users.address = '{}' and users.id = {};".format(
+                add[0], userId)
+            listFr = self.sql.executeSelect(query2)
+            for fr in listFr:
+                print(fr[0])
 
