@@ -19,20 +19,24 @@ class MessageController(MessageModel.Message):
         return msgs
 
     def sendMsg(self, userId, id, content):
-        query = "INSERT into message(sender, receiver, contents, time) values("+str(userId)+","+str(id) + ",'"+content+"','"+time.ctime()+"');"
+        query = "INSERT into message(sender, receiver, contents, time) values("+str(
+            userId)+","+str(id) + ",'"+content+"','"+time.ctime()+"');"
         self.sql.execute(query)
         print('Send message successfully!')
 
     def displayNotBeSeenMsgs(self, userId):
-        query= "select message.id,message.contents, message.sender from message, users where users.id= {} and message.receiver=users.id and message.status=0 order by message.id desc".format(userId)
-        NotBeSeenMsgsList= self.sql.executeSelect(query)
+        query = "select message.id,message.contents, message.sender from message, users where users.id= {} and message.receiver=users.id and message.status=0 order by message.id desc".format(
+            userId)
+        NotBeSeenMsgsList = self.sql.executeSelect(query)
         return NotBeSeenMsgsList
-    
-    def getUserName(self, user2):
-        query= "SELECT DISTINCT users.username from users, message WHERE users.id= message.sender and message.sender= {}".format(user2)
-        user= self.sql.executeSelect(query)
-        return user
-    def getUsername2(self, id):
-        query= "select distinct users.username from users where users.id={}".format(id)
-        return self.sql.executeSelect(query)
 
+    def getUserName(self, user2):
+        query = "SELECT DISTINCT users.username from users, message WHERE users.id= message.sender and message.sender= {}".format(
+            user2)
+        user = self.sql.executeSelect(query)
+        return user
+
+    def getUsername2(self, id):
+        query = "select distinct users.username from users where users.id={}".format(
+            id)
+        return self.sql.executeSelect(query)

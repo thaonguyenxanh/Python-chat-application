@@ -7,18 +7,16 @@ import CommonClass
 
 class usersController(UserModel.users):
 
-
     def __init__(self, id=0, username='', _password='', fullname='', _address='', _email=''):
         self.sql = sqliteModel.Sqlite()
         self.common = CommonClass.Common()
         super().__init__(id, username, _password, fullname, _address, _email)
 
     def SignUp(self, username, password, fullname, address, Email):
-        query = "insert into users(username,passwords,fullname,address,Emails) values('{}','{}','{}','{}','{}')".format(username, password, fullname, address, Email)
+        query = "insert into users(username,passwords,fullname,address,Emails) values('{}','{}','{}','{}','{}')".format(
+            username, password, fullname, address, Email)
         self.sql.execute(query)
         print('Success!, welcome to our mini chat application!')
-
-
 
     def signIn(self, username, password):
         query = "select * from users where users.username= '{}' and users.passwords= '{}'".format(
@@ -38,6 +36,3 @@ class usersController(UserModel.users):
                     return self
         else:
             print('your password is not right! please try again!')
-        
-        
-
