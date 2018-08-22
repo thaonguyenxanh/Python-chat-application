@@ -34,7 +34,7 @@ class View():
                         Email = input('Type your email: ')
                         self.uc.SignUp(username, password,
                                        fullname, address, Email)
-                        continue
+                        break
         else:
             print('Username doesnt not have space!')
 
@@ -144,8 +144,9 @@ def main():
         print('1: Sign up\n2: Sign In\n')
         choose1 = input('Choose 1 or 2 to continue: ')
         if choose1 == '1':
-            a.signUp()
-            continue
+            while 1:
+                a.signUp()
+                break
         if choose1 == '2':
             a.singIn()
             while 1:
