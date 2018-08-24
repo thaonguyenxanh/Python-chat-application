@@ -4,7 +4,7 @@ from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 
 
-def accept_incoming_connections():
+def acceptIncomingConnections():
     """Sets up handling for incoming clients."""
     while True:
         client, client_address = SERVER.accept()
@@ -12,10 +12,10 @@ def accept_incoming_connections():
         client.send(
             bytes("Greetings from the cave! Now type your name and press enter!", "utf8"))
         addresses[client] = client_address
-        Thread(target=handle_client, args=(client,)).start()
+        Thread(target=handleClient, args=(client,)).start()
 
 
-def handle_client(client):  # Takes client socket as argument.
+def handleClient(client):  # Takes client socket as argument.
     """Handles a single client connection."""
 
     name = client.recv(BUFSIZ).decode("utf8")
@@ -58,7 +58,7 @@ SERVER.bind(ADDR)
 if __name__ == "__main__":
     SERVER.listen(5)
     print("Waiting for connection...")
-    ACCEPT_THREAD = Thread(target=accept_incoming_connections)
+    ACCEPT_THREAD = Thread(target=acceptIncomingConnections)
     ACCEPT_THREAD.start()
     ACCEPT_THREAD.join()
     SERVER.close()
