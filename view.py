@@ -4,6 +4,7 @@ import switchClass
 import RelationshipController
 import datetime
 import CommonClass
+from msvcrt import getch
 
 
 class View():
@@ -159,33 +160,82 @@ def main():
                 print('7: Modify my information')
                 print('8: Display friendlist order by address')
                 print('9: Log out')
-                choose2 = input('Choose 1-9 to continue: ')
+                # choose2 = input('Choose 1-9 to continue: ')
+                print('Choose 1-9 to continue: ')
+                print('Press Ctrl-L to back to display friendlist: ')
+
+                choose2= ord(getch())
                 print('\n\n\n')
-                if choose2 == '1':
-                    a.disPlayAllMyMsgs()
-                    continue
-                if choose2 == '2':
-                    a.displayNotBeSeenMsgs()
-                    continue
-                if choose2 == '3':
-                    a.sendMsg()
-                    continue
-                if choose2 == '4':
+                if choose2== 12:
                     a.displayMyFriendList()
                     continue
-                if choose2 == '5':
-                    a.addNewFriend()
-                    continue
-                if choose2 == '6':
-                    a.blockUser()
-                    continue
-                if choose2 == '7':
-                    a.modifyUserInformation()
-                    continue
-                if choose2 == '8':
-                    a.displayFriendListOrderByAddress()
-                    continue
-                if choose2 =='9':
+                if choose2== 2:
+                    break
+                if choose2 == 49:
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    choose= ord(getch())
+                    if choose== 2:
+                        break
+                    else:
+                        a.disPlayAllMyMsgs()
+                        continue
+                if choose2 == 50:
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    choose= ord(getch())
+                    if choose== 2:
+                        break
+                    else:                    
+                        a.displayNotBeSeenMsgs()
+                        continue
+                if choose2 == 51:
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    choose= ord(getch())
+                    if choose== 2:
+                        break
+                    else:
+                        a.sendMsg()
+                        continue
+                if choose2 == 52:
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    choose= ord(getch())
+                    if choose== 2:
+                        break
+                    else:
+                        a.displayMyFriendList()
+                        continue
+                if choose2 == 53:
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    choose= ord(getch())
+                    if choose== 2:
+                        break
+                    else:                    
+                        a.addNewFriend()
+                        continue
+                if choose2 == 54:
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    choose= ord(getch())
+                    if choose== 2:
+                        break
+                    else:                
+                        a.blockUser()
+                        continue
+                if choose2 == 55:
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    choose= ord(getch())
+                    if choose== 2:
+                        break
+                    else:
+                        a.modifyUserInformation()
+                        continue
+                if choose2 == 56:
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    choose= ord(getch())
+                    if choose== 2:
+                        break
+                    else:                    
+                        a.displayFriendListOrderByAddress()
+                        continue
+                if choose2 ==57:
                     break
             continue
 
