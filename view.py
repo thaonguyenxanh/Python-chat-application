@@ -166,16 +166,20 @@ def main():
                     print('5: Add new friend')
                     print('6: Block ')
                     print('7: Modify my information')
-                    print('8: Display friendlist order by address')
+                    # print('8: Display friendlist order by address')
                     print('9: Log out')
                     # choose2 = input('Choose 1-9 to continue: ')
                     print('Choose 1-9 to continue: ')
                     print('Press Ctrl-L to back to display friendlist: ')
                     print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
+                    print('Press Ctrl-C to display friendlist order by address')
                     choose2= ord(getch())
                     print('\n\n\n')
                     if choose2== 2:
-                            break
+                        break
+                    if choose2== 3:
+                        a.displayFriendListOrderByAddress()
+                        continue
                     if choose2== 12:
                         print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
                         choose= ord(getch())
@@ -191,7 +195,6 @@ def main():
                                     for index in fr:
                                         if int(index) != a.uc.id:
                                             a.sendMsg2(int(index))
-                                            continue
                             continue
                             
                     if choose2== 2:
@@ -251,14 +254,6 @@ def main():
                             break
                         else:
                             a.modifyUserInformation()
-                            continue
-                    if choose2 == 56:
-                        print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
-                        choose= ord(getch())
-                        if choose== 2:
-                            break
-                        else:                    
-                            a.displayFriendListOrderByAddress()
                             continue
                     if choose2 ==57:
                         break
