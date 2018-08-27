@@ -30,7 +30,7 @@ class RelationshipController(RelationshipModel.Friend):
         self.sql.execute(query)
 
     def displayMyFriendlist(self, userId):
-        query = "select DISTINCT friend_list.user1, friend_list.user2 from users, friend_list where (user1= "+str(
+        query = "select DISTINCT friend_list.id, friend_list.user1, friend_list.user2 from users, friend_list where (user1= "+str(
             userId)+" and users.id=  "+str(userId)+" ) or (user2= "+str(userId)+"  and users.id=  "+str(userId)+") and friend_list.blocked=0 ;"
         frList = self.sql.executeSelect(query)
         return frList
