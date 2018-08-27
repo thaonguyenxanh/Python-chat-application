@@ -43,8 +43,8 @@ class View():
         username = input('Enter your user name: ')
         if(self.com.checkSpace(username) == False) and (self.com.CheckUser(username) != None):
             password = input('Enter your password: ')
-            self.uc.signIn(username, password)
-            return self
+            if(self.uc.signIn(username, password)!= None):
+                return self
         else:
             print('or your password is not right! please try again!')
             return None
@@ -114,16 +114,19 @@ class View():
 
     def displayMyFriendList(self):
         frList = self.rc.displayMyFriendlist(self.uc.id)
+        tempList=[]
         for fr in frList:
-            tempList = []
+            tempList1 = []
             for inf in fr:
-                tempList.append(inf)
+                tempList1.append(inf)
+            tempList.append(tempList1)
             for i in range(1,3):
-                if tempList[i] != self.uc.id:
-                    tempList[i] = self.rc.getFriendUserName(tempList[i])
+                if tempList1[i] != self.uc.id:
+                    tempList1[i] = self.rc.getFriendUserName(tempList1[i])
                 else:
-                    tempList[i] = self.rc.getFriendUserName(self.uc.id)
-        print(tempList)
+                    tempList1[i] = self.rc.getFriendUserName(self.uc.id)
+        for tl in tempList:
+            print(tl)
         return frList
 
     def blockUser(self):
@@ -168,9 +171,11 @@ def main():
                     # choose2 = input('Choose 1-9 to continue: ')
                     print('Choose 1-9 to continue: ')
                     print('Press Ctrl-L to back to display friendlist: ')
-
+                    print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
                     choose2= ord(getch())
                     print('\n\n\n')
+                    if choose2== 2:
+                            break
                     if choose2== 12:
                         print('Press Ctrl-B to back to previous menu, press anything else to continue: ')
                         choose= ord(getch())
@@ -186,7 +191,9 @@ def main():
                                     for index in fr:
                                         if int(index) != a.uc.id:
                                             a.sendMsg2(int(index))
+                                            continue
                             continue
+                            
                     if choose2== 2:
                         break
                     if choose2 == 49:
