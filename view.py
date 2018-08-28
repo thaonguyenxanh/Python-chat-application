@@ -84,7 +84,7 @@ class View():
             tempList = []
             for inf in msg:
                 tempList.append(inf)
-            for i in range(1,3):
+            for i in range(2):
                 if tempList[i] == self.uc.id:
                     tempList[i] = self.msgc.getUsername2(self.uc.id)[0][0]
                 else:
