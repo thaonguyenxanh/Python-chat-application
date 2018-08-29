@@ -1,5 +1,2 @@
-while 1:
-    from msvcrt import getch
-    input_key= ord(getch())
-
-    print(input_key)
+import numpy as np
+print(np.array(np.arange(0,4)))
